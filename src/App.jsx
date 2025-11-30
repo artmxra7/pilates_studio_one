@@ -1,35 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    // Container utama: full width, full height, background abu-abu
+    <div className="min-h-screen bg-stone-200">
+      {/* Konten utama: lebar maks 375px (ukuran iPhone), terpusat, tanpa latar luar */}
+      <div className="max-w-[535px] mx-auto min-h-screen bg-gray-50">
+        {/* Header */}
+        <div className="bg-amber-100 py-3 text-center">
+          <h1 className="font-bold text-amber-800">A PLUS PILATES BALI</h1>
+        </div>
+
+        {/* Promo */}
+        <div className="p-4 text-center">
+          <p className="text-sm mb-2">"Ready to feel stronger..."</p>
+          <button className="bg-amber-600 text-white px-3 py-1 rounded text-sm">
+            Book Private Class
+          </button>
+        </div>
+
+        {/* DatePicker & Class Cards akan di sini */}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
