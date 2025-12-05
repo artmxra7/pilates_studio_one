@@ -1,0 +1,109 @@
+/* ClassCard.css */
+.class-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  background-color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 100%;
+}
+
+.class-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+.class-content {
+  padding: 16px;
+}
+
+.class-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 0 8px 0;
+  color: #333;
+}
+
+.class-meta {
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #666;
+}
+
+.meta-item {
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.class-description {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+  margin: 12px 0;
+}
+
+.class-price {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #999;
+  font-size: 14px;
+}
+
+.discounted-price {
+  font-size: 18px;
+  font-weight: bold;
+  color: #d32f2f;
+  /* Merah untuk harga diskon */
+}
+
+.class-actions {
+  display: flex;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s;
+  text-align: center;
+}
+
+.btn-add-to-cart {
+  background-color: #e0c7a6;
+  color: #333;
+}
+
+.btn-add-to-cart:hover {
+  background-color: #d4b895;
+}
+
+.btn-book-now {
+  background-color: #9C6A42;
+  color: white;
+}
+
+.btn-book-now:hover {
+  background-color: #8a5d3a;
+}
+
+.available-slots {
+  font-size: 12px;
+  color: #777;
+  text-align: right;
+  margin-top: 8px;
+}
