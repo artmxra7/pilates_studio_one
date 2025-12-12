@@ -1,2 +1,63 @@
 @import './tailwind/index.css';
 @import './components/index.css';
+
+.header-lux {
+  background-color: #FAF9F6;
+    color: #2D2D2D;
+}
+
+.hero-card {
+  background-color: #E8E3D7;
+  border: 1px solid #D4AF37;
+  color: #2D2D2D;
+}
+
+.hero-button {
+  background-color: #D4AF37;
+  color: #FAF9F6;
+  font-weight: 500;
+  padding: 8px 24px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.hero-button:hover {
+  background-color: #C9A66B;
+  /* emas lebih gelap saat hover */
+}
+
+.calendar-header {
+  background-color: #FAF9F6;
+  color: #2D2D2D;
+}
+
+.day-active {
+  background-color: #D4AF37;
+  color: #FAF9F6;
+  border-radius: 50%;
+}
+
+.day-inactive {
+  color: #666;
+}
+
+.class-card {
+  background-color: #fff;
+  border: 1px solid #D4AF37;
+  color: #2D2D2D;
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.05);
+}
+
+.class-title {
+  color: #D4AF37;
+  font-family: 'Playfair Display', serif;
+}
+
+.class-meta span {
+  color: #2D2D2D;
+}
+
+.class-price {
+  color: #D4AF37;
+  font-weight: bold;
+}

@@ -1,118 +1,91 @@
 // CalendarComponent.jsx
-import React, { useState } from 'react';
-import { DayPicker } from 'react-day-picker';
-import 'react-day-picker/dist/style.css';
+import React, { useState, useEffect } from 'react';
 import WeeklyCalendar from './WeeklyCalendar';
 
 const CalendarComponent = ({ onOpenFilter }) => {
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const today = new Date();
+  const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
 
-  // Format nama hari (Mon, Tue, Wed...)
-  const formatWeekdayName = (date) => {
-    return new Intl.DateTimeFormat('en-US', { weekday: 'short' }).format(date);
+  const [currentMonth, setCurrentMonth] = useState(startOfMonth);
+  const [selectedDate, setSelectedDate] = useState(today);
+
+  // 🔁 Sinkronkan selectedDate saat bulan berubah → hanya sekali
+  useEffect(() => {
+    const day = selectedDate.getDate();
+    const newDate = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
+
+    // Log hanya untuk debugging
+    console.log('📅 Bulan berpindah →', currentMonth.toLocaleDateString('default', { month: 'long', year: 'numeric' }));
+    console.log('🔄 Tanggal disesuaikan →', newDate.toDateString());
+
+    setSelectedDate(newDate);
+  }, [currentMonth]); // ✅ Hanya currentMonth, BUKAN selectedDate
+
+  const handlePrev = () => {
+    const prev = new Date(currentMonth);
+    prev.setMonth(prev.getMonth() - 1);
+    if (prev >= startOfMonth) {
+      setCurrentMonth(prev);
+    }
   };
 
-  // Custom styles
-  const styles = {
-    container: {
-      fontFamily: 'Arial, sans-serif',
-      padding: '16px',
-      backgroundColor: '#fff',
-    },
-    header: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      marginBottom: '16px',
-    },
-    monthNav: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '8px',
-    },
-    monthLabel: {
-      fontSize: '18px',
-      fontWeight: 'bold',
-    },
-    navButton: {
-      background: '#f0f0f0',
-      border: 'none',
-      borderRadius: '50%',
-      width: '32px',
-      height: '32px',
-      cursor: 'pointer',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    filtersButton: {
-      background: '#fff',
-      border: '1px solid #ddd',
-      borderRadius: '20px',
-      padding: '8px 16px',
-      cursor: 'pointer',
-      display: 'flex',
-      alignItems: 'center',
-      gap: '4px',
-    },
-    cartButton: {
-      background: '#fff',
-      border: '1px solid #ddd',
-      borderRadius: '50%',
-      width: '32px',
-      height: '32px',
-      cursor: 'pointer',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    day: {
-      width: '40px',
-      height: '40px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      borderRadius: '4px',
-      cursor: 'pointer',
-    },
-    selectedDay: {
-      background: '#9C6A42',
-      color: 'white',
-    },
-    weekRow: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      marginBottom: '8px',
-    },
-    dayLabel: {
-      fontSize: '12px',
-      textAlign: 'center',
-      marginBottom: '4px',
-    },
+  const handleNext = () => {
+    const next = new Date(currentMonth);
+    next.setMonth(next.getMonth() + 1);
+    setCurrentMonth(next);
   };
+
+  const isPrevDisabled = currentMonth.getTime() <= startOfMonth.getTime();
+
+  const monthLabel = currentMonth.toLocaleString('en-US', {
+    month: 'long',
+    year: 'numeric',
+  });
 
   return (
-    <div style={styles.container}>
-      {/* Header */}
-      <div style={styles.header}>
-        <div style={styles.monthNav}>
-          <button style={styles.navButton} onClick={() => { /* handle prev month */ }}>
+    <div style={{ padding: '16px', backgroundColor: '#fff' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <button
+            onClick={handlePrev}
+            disabled={isPrevDisabled}
+            style={{
+              background: isPrevDisabled ? '#e0e0e0' : '#f0f0f0',
+              border: 'none',
+              borderRadius: '50%',
+              width: '32px',
+              height: '32px',
+              cursor: isPrevDisabled ? 'not-allowed' : 'pointer',
+              opacity: isPrevDisabled ? 0.5 : 1,
+            }}
+          >
             {'<'}
           </button>
-          <span style={styles.monthLabel}>December 2025</span>
-          <button style={styles.navButton} onClick={() => { /* handle next month */ }}>
+
+          <span style={{ fontSize: '18px', fontWeight: 'bold' }}>{monthLabel}</span>
+
+          <button
+            onClick={handleNext}
+            style={{
+              background: '#f0f0f0',
+              border: 'none',
+              borderRadius: '50%',
+              width: '32px',
+              height: '32px',
+              cursor: 'pointer',
+            }}
+          >
             {'>'}
           </button>
         </div>
-        <div style={{ display: 'flex', gap: '8px' }}>
-          <button onClick={onOpenFilter} style={styles.filtersButton}>
-            <span>🪄</span> Filters
-          </button>
-          <button style={styles.cartButton}>🛒</button>
-        </div>
       </div>
 
-      <WeeklyCalendar />
+      {/* Kirim selectedDate & currentMonth ke WeeklyCalendar */}
+      <WeeklyCalendar
+        selectedDate={selectedDate}
+        onDateSelect={setSelectedDate}
+        currentMonth={currentMonth}
+      />
     </div>
   );
 };

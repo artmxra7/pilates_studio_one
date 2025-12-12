@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import './App.css';
 import CalendarComponent from './CalendarComponent';
 import ClassCard from './ClassCard';
 import FilterDrawer from './FilterDrawer';
+import logoImage from '@/assets/images/png/logo.png';
 
 function App() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -15,8 +15,8 @@ function App() {
       {/* Konten utama: lebar maks 375px (ukuran iPhone), terpusat, tanpa latar luar */}
       <div className="max-w-[535px] h-full mx-auto min-h-screen bg-gray-50">
         {/* Header */}
-        <div className="bg-amber-100 flex flex-col items-center space-y-2 justify-center mx-auto py-12">
-          <img className='max-w-[300px] h-full' src='https://booking.apluspilates.id/images/logo.png'></img>
+        <div className="header-lux flex flex-col items-center space-y-2 justify-center mx-auto py-12">
+          <img className='max-w-[300px] h-full' src={logoImage}></img>
           <p>A Plus Pilates Booking</p>
         </div>
 
@@ -36,7 +36,7 @@ function App() {
           </div>
           <div className="flex justify-between mt-8 mx-4 items-baseline">
             <h1 className="text-xl font-semibold">Available Class</h1>
-            <p className="text-gray-500 text-sm">24 Class Found</p>
+            <p className="text-gray-500 text-sm">5 Class Found</p>
           </div>
           <div className='flex flex-col gap-4 mt-4 mx-4'>
             <ClassCard />
